@@ -105,10 +105,10 @@ jobs:
       - run:
           name: scan-frontend
           command: |
-            cd frontend
-            npm install 
+            cd frontend            
+            npm install npm@latest –g
             npm audit fix --force --audit-level=critical
-            npx audit --audit-level=critical
+            npm audit --audit-level=critical
   
   scan-backend:
     docker:
