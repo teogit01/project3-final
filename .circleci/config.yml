@@ -179,18 +179,17 @@ jobs:
           command: |          
             aws cloudformation deploy \
               --template-file .circleci/files/backend.yml \
-              --tags project=udapeople \
               --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
-              --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"
-
+              --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}" \
+              --tags project=udapeople
       - run:
           name: Ensure front-end infrastructure exist
           command: |
             aws cloudformation deploy \
               --template-file .circleci/files/frontend.yml \
-              --tags project=udapeople \
               --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
-              --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"              
+              --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  \
+              --tags project=udapeople
 
       - run:
           name: Add back-end ip to ansible inventory
@@ -202,6 +201,7 @@ jobs:
             )
             echo $BACKEND_PUBLIC_IP >> .circleci/ansible/inventory.txt
             cat .circleci/ansible/inventory.txt
+
       - persist_to_workspace:
           root: ~/
           paths:
@@ -217,7 +217,7 @@ jobs:
       - checkout
       - install_ansible
       - add_ssh_keys:
-          fingerprints: ["14:f0:23:f5:1e:13:58:55:76:bc:7e:f8:30:26:db:2c:4d:35:d1:82"]
+          fingerprints: ["66:be:9c:93:c1:34:f6:76:87:93:49:36:54:e3:68:47:16:3f:b5:f6"]
       - attach_workspace:
           at: ~/
       - run:
@@ -226,7 +226,6 @@ jobs:
             cd .circleci/ansible
             cat inventory.txt
             ansible-playbook -i inventory.txt configure-server.yml
-
       - notify_on_failure
       - destroy-environment
 
