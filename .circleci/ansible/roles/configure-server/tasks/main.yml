@@ -1,0 +1,18 @@
+---
+- name: "Add Node Env"
+  become: true
+  shell: |
+    curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
+- name: "Install NodeJS 13"
+  become: true
+  apt:
+    name: ["nodejs"]
+    state: latest
+    update_cache: yes
+
+- name: "Install pm2 globally"
+  npm:
+    name: pm2
+    global: yes
+    production: yes
+    state: present
