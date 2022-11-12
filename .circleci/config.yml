@@ -2,7 +2,7 @@ version: 2.1
 
 orbs:
   slack: circleci/slack@4.9.3
-  
+
 commands:  
   install_awscli:
     description: Install AWS CLI
@@ -349,8 +349,9 @@ jobs:
             fi
       - run:
           name: Frontend smoke test.
-          command: |
-            FRONTEND_URL=http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3-website-${AWS_DEFAULT_REGION}.amazonaws.com
+          command: |            
+            FRONTEND_URL=http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3-website-us-east-1.amazonaws.com/#/employees
+          # FRONTEND_URL=http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3-website-${AWS_DEFAULT_REGION}.amazonaws.com
             if curl -s $FRONTEND_URL | grep "Welcome"
             then
               exit 0
