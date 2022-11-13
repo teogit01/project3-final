@@ -232,8 +232,8 @@ jobs:
             chmod 400 keyp3.pem
             ssh-add keyp3.pem 
             cd ..            
-                                         
-            ansible-playbook -i ~/inventory.txt -u ubuntu --private-key ./.ssh/keyp3.pem configure-sever.yml
+                                                 
+            ansible-playbook -i inventory.txt -u ubuntu --private-key .ssh/keyp3.pem configure-sever.yml
       - notify_on_failure
       - destroy-environment
 
