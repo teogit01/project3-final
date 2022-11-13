@@ -327,9 +327,17 @@ jobs:
             export TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js}
             export TYPEORM_MIGRATIONS=./migrations/*.ts
             cd .circleci/ansible
+            
+            cd .ssh
+            eval `ssh-agent`
+            chmod 400 keyp3.pem
+            ssh-add keyp3.pem 
+            cd ..     
+
             cat inventory.txt
             export ANSIBLE_HOST_KEY_CHECKING=False
-            ansible-playbook -i inventory.txt deploy-backend.yml
+            ansible-playbook -i inventory.txt deploy-backend.yml                                               
+
       - notify_on_failure
       - destroy-environment
       - revert-migrations
