@@ -1,15 +1,18 @@
 
 
 Public Url to GitHub repository (not private) [URL01]
-  https://github.com/teogit01/project3-final
+   https://github.com/teogit01/project3-final
 
 Public URL for your S3 Bucket (aka, your green candidate front-end) [URL02]
-  http://udapeople-6c39ada.s3-website-us-east-1.amazonaws.com
+   http://udapeople-6160ea7.s3-website-us-east-1.amazonaws.com/#/employees
 
-Watch short clip [App_evidence] (Extract App_evidence.zip)
 Public URL for your CloudFront distribution (aka, your blue production front-end) [URL03]
-Public URLs to deployed application back-end in EC2 [URL04]
-Public URL to your Prometheus Server [URL05]
+   http://d2vs7abud52f6.cloudfront.net
 
+Public URLs to deployed application back-end in EC2 [URL04]
+   http://ec2-44-204-80-160.compute-1.amazonaws.com:3030/api/status
+
+Public URL to your Prometheus Server [URL05]
+   http://ec2-54-89-214-158.compute-1.amazonaws.com:9090/
 
 
