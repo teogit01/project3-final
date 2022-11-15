@@ -394,6 +394,7 @@ jobs:
               --template-file .circleci/files/cloudfront.yml \
               --stack-name InitialStack \
               --parameter-overrides WorkflowID="${CIRCLE_WORKFLOW_ID:0:7}" \
+              -- tags project=udapeople
       - run:
           name: Save old Workflow_ID
           command: |
@@ -402,7 +403,9 @@ jobs:
                       --no-paginate --output text)
             echo "Old Workflow ID: $OLD_WORKFLOW_ID"
             curl https://kvdb.io/CJhzGNYEFHWL71z3PVjMum/old_workflow_id -d "${OLD_WORKFLOW_ID}"
-      
+
+            echo old worklow id: '${OLD_WORKFLOW_ID}'
+            echo curent worklow id: '${CIRCLE_WORKFLOW_ID}'
       - destroy-environment
       - revert-migrations
   cleanup:
@@ -418,7 +421,7 @@ jobs:
             export OldWorkflowID=$(curl --insecure https://kvdb.io/CJhzGNYEFHWL71z3PVjMum/old_workflow_id)
             echo Old Workflow ID: $OldWorkflowID
             echo CIRCLE_WORKFLOW_ID "${CIRCLE_WORKFLOW_ID:0:7}"
-            if [[ "${CIRCLE_WORKFLOW_ID:0:7}" != "${OldWorkflowID}" ]]
+            if [[ "${CIRCLE_WORKFLOW_ID:0:7}" == "${OldWorkflowID}" ]]
             then
               echo '--Delete confirm--'
               aws s3 rm s3://udapeople-${OldWorkflowID} --recursive
